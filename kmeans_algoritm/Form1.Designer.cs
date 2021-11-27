@@ -151,7 +151,6 @@
             this.txt_Epsilon.Size = new System.Drawing.Size(373, 22);
             this.txt_Epsilon.TabIndex = 16;
             this.txt_Epsilon.Text = "100";
-            this.txt_Epsilon.TextChanged += new System.EventHandler(this.txt_Epsilon_TextChanged);
             this.txt_Epsilon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label6
@@ -314,7 +313,6 @@
             this.txt_countIteration.Size = new System.Drawing.Size(373, 22);
             this.txt_countIteration.TabIndex = 18;
             this.txt_countIteration.Text = "10";
-            this.txt_countIteration.TextChanged += new System.EventHandler(this.countIteration_TextChanged);
             this.txt_countIteration.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label3
@@ -325,7 +323,6 @@
             this.label3.Size = new System.Drawing.Size(153, 17);
             this.label3.TabIndex = 17;
             this.label3.Text = "Количество итераций";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label7
             // 
@@ -372,7 +369,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 694);
+            this.ClientSize = new System.Drawing.Size(693, 693);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnPaint);
             this.Controls.Add(this.lblError);

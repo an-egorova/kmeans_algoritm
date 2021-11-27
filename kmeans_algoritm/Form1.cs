@@ -7,43 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using System.IO;
 
 namespace kmeans_algoritm
 {
     public partial class Form1 : Form
     {
-        /// Основные входные данные:
-        ///1) Количество векторов - vecCount
-        ///2) Числовой диапазон векторов - vecRange
-        ///3) Количество кластеров - clusterCount
-        ///4) Эпсилон(нужно для расчета J, по сути сколько итераций будет произведено) - Eps
-
-        ///Общий алгоритм:
-        ///1) Генерация векторов
-        ///2) Выбор центров
-        ///3) Распределение по кластерам
-        ///4) Проверка критерия J.Если разница между нынешним и предыдущим меньше, чем Эпсилон - заканчиваем алгоритм/ иначе повторяем пункты 2-3
-
-        ///Основные входные данные:
-        ///1) Количество векторов
-        ///2) Размерность векторов
-        ///3) Количество кластеров
-        ///4) Эпсилон(нужно для расчета J, по сути сколько итераций будет произведено)
-
-        ///1 задача:
-        ///Генерация векторов как говорил Коган
-        ///Входные данные: 1,2 + диапазон рандома, который входит в 2
-        ///Выходные данные: сгенерированные векторы (одномерные массивы)
-
-
-
         //ИСХОДНЫЕ ДАННЫЕ//
-
         int vecCount = 0;//количество векторов
         int vecRange = 0;//размерность векторов
         public static int clusterCount = 0; //количество кластеров
         int Eps = 0;//дельта для генерации 
+        ReadFromFile wWFiles;
+        SaveToFile stFiles;
+
         public static int iteration = 0; //количество итераций
         public static double correspondence = 0;//число совпадений
         public static int countIterationVar = 0;//макс. количество итераций
@@ -51,8 +29,8 @@ namespace kmeans_algoritm
         double bestPartitionJ0;//массив центроидов кластера J0 (что-то, что Коган назван Эпсилон)
         double bestPartitionJ1;//массив центроидов кластера J1 (что-то, что Коган назван Эпсилон)
 
-        int[,] vectors; //[vecCount, vecRange];
-        int[,] centroids; //[vecCount, vecRange];
+        //int[,] vectors; //[vecCount, vecRange];
+        //int[,] centroids; //[vecCount, vecRange];
         int[,] matrixToRead;//массив для чтения из файла
         int[] pointCoord; //выбор вектора для центра кластера (рандом)
         double[,] sumPoint; //расстояние от каждого вектора до центра (первая ячейка - центр, вторая - расстояние от вектора)
@@ -65,7 +43,7 @@ namespace kmeans_algoritm
         //сравнение по центрам, т.к. если вектора не будут менять кластеры, то центры не будут меняться
         int[,] check_1; //предыдущая итерация
         int[,] check_2; //текущая итерация
-        List<int[,]> listOfVectors = new List<int[,]>();
+        //List<int[,]> listOfVectors = new List<int[,]>();
         string stringForSaveIntoFile = String.Empty;//строка для сохранения в файл массива точек
         public static int[,,] clasteringAllInfo; //массив, который хранит информацию о всех итерациях [итерация|номер вектора|номер кластера, которому принадлежит вектор]
         int[,] clasteringInfo; //массив принадлежности вектора кластеру в одной итерации [номер вектора|номер кластера, которому принадлежит вектор] (оставлено для отладки)
@@ -74,9 +52,10 @@ namespace kmeans_algoritm
 
         public static int[,,] centroidsClusterAll;//массив координат цетров по всем итерациям
         public static int graphCount=0;
+        GeneratePoints generatePoint;
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
             radioButton1.Checked = true;
         }
 
@@ -88,108 +67,32 @@ namespace kmeans_algoritm
         // кнопка запуска генерации векторов с рандомным набором значений 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            generatePoint = new GeneratePoints();
             lblError.Text = String.Empty;
             //запускает генератор только если входные данные корректны
             if (checkCheckBoxes())
             {
                 lblError.Text = String.Format("вошли в генератор");//для дебага
-                generateCentroids();
-                generateClasterPoints();
-
+                generatePoint.generateCentroids(vecCount, vecRange, clusterCount, Eps);//вызвали метод и сгенерили вектора                
                 //использовала в качестве дебага, но может пригодиться
                 //метод загружает в текст бокс векторы
                 loadVectorsIntoTextBox();
                 btnClusterization.Enabled = true;
                 btnSaveFile.Enabled = true;
+                vectorCoord = generatePoint.VectorCoord;
             }
             else lblError.Text += String.Format("\n" + "Ошибка входных данных");
 
-        }
+        }   
 
-        //метод для генерации начальных центроидов
-        private void generateCentroids()
-        {
-            Random random = new Random();
-            //начальные точки, от которых стартую рандом
-            int x1 = random.Next(50);
-            int y1 = random.Next(50);
-            centroids = new int[vecCount, clusterCount];
-            //для каждого кластера начинаем генерить вектора
-            //координаты х
-            for (int i = 0; i < clusterCount; i++)
-            {
-                //координаты у
-                for (int j = 0; j < vecRange; j++)
-                {
-                    centroids[i, j] = random.Next(-450 +i*20 + x1, 450 - i * 20 + y1);
-                }
-            }
-
-        }
-
-        //метод для генерации точек для кластера
-        private void generateClasterPoints()
-        {
-            txt_Result.Text = String.Empty;
-            Random random = new Random();
-            //vectorCoord = new int[vecCount*clusterCount, vecRange];
-            //для каждого кластера начинаем генерить вектора
-            for (int clusterNum = 0; clusterNum < clusterCount; clusterNum++)
-            {
-                vectors = new int[vecCount, vecRange];
-                var zx = centroids[clusterNum, 0];
-                var zy = centroids[clusterNum, 1];
-                //координаты х
-                for (int i = 0; i < vecCount; i++)
-                {
-                    //координаты у
-                    for (int j = 0; j < vecRange; j++)
-                    {
-                        if (j == 0) vectors[i, j] = random.Next(zx - Eps, zx + Eps);
-                        else vectors[i, j] = random.Next(zy - Eps, zy + Eps);
-                        
-                        //vectorCoord[i, j] = vectors[i, j];
-                    }
-
-                }
-                listOfVectors.Add(vectors);
-                vectors = null;
-            }
-            fillVectorFromList();
-        }
-
-        private void fillVectorFromList()
-        {
-            int vector;
-            vectorCoord = new int[vecCount*clusterCount, vecRange];
-            //выводим кластеры
-            int h = 0;//<clusterCount*vecCount
-            int d = 0; //<vecRange
-            foreach (var item in listOfVectors)
-            {
-                for (int k = 0; k < item.GetLength(0); k++)
-                {
-                    d = 0;
-                    for (int g = 0; g < item.GetLength(1); g++)
-                    {
-                        //vector = item[k, g];
-                     
-                            vectorCoord[h, d] = item[k, g];
-                        d++;
-                    }
-                    h++;
-                }
-
-            }
-
-        }
+       
 
         //использовала для дебага, выводит массив веторов в текст бокс
         private void loadVectorsIntoTextBox()
         {
             txt_Result.Text = String.Empty;
             string vector = String.Empty;
-
+            var centroids = generatePoint.Centroids;
             //выводим цетроиды
             for (int i = 0; i < clusterCount; i++)
             {
@@ -203,7 +106,7 @@ namespace kmeans_algoritm
 
             int c = 0;
             //выводим кластеры
-            foreach (var item in listOfVectors)
+            foreach (var item in generatePoint.ListOfVectors)
             {
                 for (int k = 0; k < item.GetLength(0); k++)
                 {
@@ -1186,22 +1089,6 @@ namespace kmeans_algoritm
                 }
             }
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void countIteration_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_Epsilon_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
@@ -1211,154 +1098,50 @@ namespace kmeans_algoritm
         //кнопка кластеризации
         private void button2_Click(object sender, EventArgs e)
         {
+            //vectorCoord = new int[vecCount * clusterCount, vecRange];
+            //vectorCoord = generatePoint.VectorCoord;
             graphCount++;
             clasteringMetod();
             btnPaint.Enabled = true;
         }
         string stringOfVector = String.Empty;
         // кнопка читать из файла
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-            string line = String.Empty;
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "D:\\Code";
-                openFileDialog.Filter = "txt files (*.txt)|*.txt";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
-
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    var fileStream = openFileDialog.OpenFile();
-                    int counter = 0;
-                    int i = 0;
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            txt_Result.Text += "counter = " + counter + "\n";
-                            line.Replace("\n", "");
-                            line.Trim();
-                            if (counter == 0)
-                            {
-                                vecCount = Convert.ToInt32(line);
-                                counter++;
-                            }
-                            else if (counter == 1)
-                            {
-                                vecRange = Convert.ToInt32(line);
-                                counter++;
-
-                            }
-                            else if (counter == 2)
-                            {
-                                clusterCount = Convert.ToInt32(line);
-                                counter++;
-                                matrixToRead = new int[vecCount * clusterCount, vecRange];
-                            }
-                            else if (counter == 3)
-                            {
-                                minEqualVar = Convert.ToDouble(line);
-                                counter++;
-                            }
-
-                            else if (counter > 3)
-                            {
-                                txt_Result.Text += "i = " + i + "\n";
-                                // stringOfVector = reader.ReadToEnd();                                
-                                //parseStringToVector(stringOfVector);
-                                //for (int i = 0; i < vecCount; i++)
-                                //{
-                                if (i < vecCount * clusterCount)
-                                {
-                                    for (int j = 0; j < vecRange; j++)
-                                    {
-                                        try
-                                        {
-                                            txt_Result.Text += "0 = " + Convert.ToInt32(line.Substring(0, line.IndexOf(','))) + "\n";
-                                            matrixToRead[i, j] = Convert.ToInt32(line.Substring(0, line.IndexOf(',')));
-                                            line = line.Substring(line.IndexOf(',') + 1);
-                                        }
-                                        catch
-                                        {
-                                            txt_Result.Text += "1 = " + Convert.ToInt32(line.Substring(0)) + "\n";
-                                            matrixToRead[i, j] = Convert.ToInt32(line.Substring(0));
-                                        }
-
-                                    }
-
-                                }
-                                i++;
-                                //}
-                            }
-
-                        }
-                    }
-                }
-                vectorCoord = matrixToRead;
-                fillTextBoxes();
-            }
+            wWFiles = new ReadFromFile();
+            vectorCoord = wWFiles.readFromTXT();
+            fillTextBoxes();
             btnClusterization.Enabled = true;
+            txt_Result.Text += "Успешно прочитано.";
+            //var task = Task.Run(() => readFromTXT());
+            //task.Wait();
         }
-
-
+        
+        
         private void fillTextBoxes()
         {
-            txt_vecCount.Text = vecCount.ToString();
-            txt_vecRange.Text = vecRange.ToString();
-            txt_clusterCount.Text = clusterCount.ToString();
-            txt_minEqual.Text = minEqualVar.ToString();
+            txt_vecCount.Text = wWFiles.VectorCount.ToString();
+            txt_vecRange.Text = wWFiles.VectorRange.ToString();
+            txt_clusterCount.Text = wWFiles.ClusterCount.ToString();
+            txt_minEqual.Text = wWFiles.MinEqualVar.ToString();
         }
 
         //Сохранить в файл
         private void button5_Click(object sender, EventArgs e)
         {
-            safeIntoFile();
+            stFiles = new SaveToFile();
+            stFiles.safeIntoFile(vecCount, vecRange, clusterCount, minEqualVar, stringForSaveIntoFile);
             txt_Result.Text += "Файл сохранен.\n";
-        }
-
-        private void safeIntoFile()
-        {
-            try
-            {
-                string writePath = String.Empty;
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
-                    saveFileDialog.InitialDirectory = "D:\\Code";
-                    saveFileDialog.Filter = "txt files (*.txt)|*.txt";
-                    saveFileDialog.FilterIndex = 2;
-                    saveFileDialog.RestoreDirectory = true;
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.Default))
-                        {
-                            sw.WriteLine(vecCount);
-                            sw.WriteLine(vecRange);
-                            sw.WriteLine(clusterCount);
-                            sw.WriteLine(minEqualVar);
-                            sw.WriteLine(stringForSaveIntoFile);
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                txt_Result.Text += "Ошибка записи в файл \n";
-            }
-        }
+        }        
 
         private void button4_Click(object sender, EventArgs e)
         {
+            generatePoint = null;
             vecCount = 0;//количество векторов
             vecRange = 0;//размерность векторов
             clusterCount = 0; //количество кластеров
-            vectors = null; //[vecCount, vecRange];
-            centroids = null; //[vecCount, vecRange];
+            //vectors = null; //[vecCount, vecRange];
+            //centroids = null; //[vecCount, vecRange];
             Eps = 0;//дельта для генерации 
             iteration = 0; //количество итераций
             correspondence = 0;//число совпадений
