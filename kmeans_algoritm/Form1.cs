@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -493,7 +493,8 @@ namespace kmeans_algoritm
         {
             Random random = new Random();
             int clust = random.Next(clusterCount);
-            switch (clust)
+
+            switch (clusterCount)
             {
                 case 1:
                     for (int c = 0; c < clusterCount; c++)
@@ -502,11 +503,11 @@ namespace kmeans_algoritm
                     }
                     break;
                 case 2:
-                    if (clust==1)
+                    if (clust == 1)
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(0, countAllVec/2 - clusterCount);
+                            pointCoord[c] = random.Next(0, countAllVec / 2 - clusterCount);
                         }
 
                     }
@@ -514,7 +515,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec/2,countAllVec - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 2, countAllVec - clusterCount);
                         }
 
                     }
@@ -524,7 +525,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(0, countAllVec/3 - clusterCount);
+                            pointCoord[c] = random.Next(0, countAllVec / 3 - clusterCount);
                         }
 
                     }
@@ -532,7 +533,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 3 - clusterCount, (countAllVec*2/3) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 3, (countAllVec * 2 / 3) - clusterCount);
                         }
 
                     }
@@ -540,7 +541,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 2 / 3) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 2 / 3), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -557,7 +558,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 4 - clusterCount, (countAllVec * 2 / 4) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 4, (countAllVec * 2 / 4) - clusterCount);
                         }
 
                     }
@@ -565,7 +566,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec*2 / 4 - clusterCount, (countAllVec * 3 / 4) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 4, (countAllVec * 3 / 4) - clusterCount);
                         }
 
                     }
@@ -573,7 +574,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 3 / 4) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 3 / 4), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -590,7 +591,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 5 - clusterCount, (countAllVec * 2 /5) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 5, (countAllVec * 2 / 5) - clusterCount);
                         }
 
                     }
@@ -598,7 +599,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 5 - clusterCount, (countAllVec * 3 / 5) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 5, (countAllVec * 3 / 5) - clusterCount);
                         }
 
                     }
@@ -606,7 +607,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 5- clusterCount, (countAllVec * 4 / 5) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 5, (countAllVec * 4 / 5) - clusterCount);
                         }
 
                     }
@@ -614,7 +615,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 4 / 5) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 4 / 5), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -631,7 +632,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 6 - clusterCount, (countAllVec * 2 / 6) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 6, (countAllVec * 2 / 6) - clusterCount);
                         }
 
                     }
@@ -639,7 +640,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 6 - clusterCount, (countAllVec * 3 / 6) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 6, (countAllVec * 3 / 6) - clusterCount);
                         }
 
                     }
@@ -647,7 +648,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 6 - clusterCount, (countAllVec * 4 / 6) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 6, (countAllVec * 4 / 6) - clusterCount);
                         }
 
                     }
@@ -655,7 +656,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 4 / 6- clusterCount, (countAllVec * 5 / 6) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 4 / 6, (countAllVec * 5 / 6) - clusterCount);
                         }
 
                     }
@@ -663,7 +664,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 5 / 6) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 5 / 6), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -680,7 +681,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 7 - clusterCount, (countAllVec * 2 / 7) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 7, (countAllVec * 2 / 7) - clusterCount);
                         }
 
                     }
@@ -688,7 +689,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 7- clusterCount, (countAllVec * 3 / 7) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 7, (countAllVec * 3 / 7) - clusterCount);
                         }
 
                     }
@@ -696,7 +697,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 7- clusterCount, (countAllVec * 4 / 7) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 7, (countAllVec * 4 / 7) - clusterCount);
                         }
 
                     }
@@ -704,7 +705,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 4 / 7 - clusterCount, (countAllVec * 5 / 7) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 4 / 7, (countAllVec * 5 / 7) - clusterCount);
                         }
 
                     }
@@ -712,7 +713,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 5/ 7 - clusterCount, (countAllVec * 6 / 7) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 5 / 7, (countAllVec * 6 / 7) - clusterCount);
                         }
 
                     }
@@ -720,7 +721,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 6 / 7) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 6 / 7), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -737,7 +738,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 8 - clusterCount, (countAllVec * 2 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 8, (countAllVec * 2 / 8) - clusterCount);
                         }
 
                     }
@@ -745,7 +746,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 8 - clusterCount, (countAllVec * 3 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 8, (countAllVec * 3 / 8) - clusterCount);
                         }
 
                     }
@@ -753,7 +754,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 8 - clusterCount, (countAllVec * 4 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 8, (countAllVec * 4 / 8) - clusterCount);
                         }
 
                     }
@@ -761,7 +762,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 4 / 8 - clusterCount, (countAllVec * 5 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 4 / 8, (countAllVec * 5 / 8) - clusterCount);
                         }
 
                     }
@@ -769,7 +770,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 5 / 8 - clusterCount, (countAllVec * 6 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 5 / 8, (countAllVec * 6 / 8) - clusterCount);
                         }
 
                     }
@@ -777,7 +778,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 6 / 8 - clusterCount, (countAllVec * 7 / 8) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 6 / 8, (countAllVec * 7 / 8) - clusterCount);
                         }
 
                     }
@@ -785,7 +786,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 7 / 8) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 7 / 8), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -802,7 +803,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 9 - clusterCount, (countAllVec * 2 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 9, (countAllVec * 2 / 9) - clusterCount);
                         }
 
                     }
@@ -810,7 +811,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 9 - clusterCount, (countAllVec * 3 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 9, (countAllVec * 3 / 9) - clusterCount);
                         }
 
                     }
@@ -818,7 +819,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 9- clusterCount, (countAllVec * 4 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 9, (countAllVec * 4 / 9) - clusterCount);
                         }
 
                     }
@@ -826,7 +827,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 4 / 9 - clusterCount, (countAllVec * 5 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 4 / 9, (countAllVec * 5 / 9) - clusterCount);
                         }
 
                     }
@@ -834,7 +835,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 5 / 9- clusterCount, (countAllVec * 6 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 5 / 9, (countAllVec * 6 / 9) - clusterCount);
                         }
 
                     }
@@ -842,7 +843,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 6 / 9 - clusterCount, (countAllVec * 7 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 6 / 9, (countAllVec * 7 / 9) - clusterCount);
                         }
 
                     }
@@ -850,7 +851,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 7 / 9 - clusterCount, (countAllVec * 8 / 9) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 7 / 9, (countAllVec * 8 / 9) - clusterCount);
                         }
 
                     }
@@ -858,7 +859,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 8 / 9) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 8 / 9), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -875,7 +876,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec / 10 - clusterCount, (countAllVec * 2 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec / 10, (countAllVec * 2 / 10) - clusterCount);
                         }
 
                     }
@@ -883,7 +884,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 2 / 10 - clusterCount, (countAllVec * 3 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 2 / 10, (countAllVec * 3 / 10) - clusterCount);
                         }
 
                     }
@@ -891,7 +892,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 3 / 10- clusterCount, (countAllVec * 4 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 3 / 10, (countAllVec * 4 / 10) - clusterCount);
                         }
 
                     }
@@ -899,7 +900,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 4 / 10 - clusterCount, (countAllVec * 5 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 4 / 10, (countAllVec * 5 / 10) - clusterCount);
                         }
 
                     }
@@ -907,7 +908,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 5 / 10 - clusterCount, (countAllVec * 6 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 5 / 10, (countAllVec * 6 / 10) - clusterCount);
                         }
 
                     }
@@ -915,7 +916,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 6 /10 - clusterCount, (countAllVec * 7 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 6 / 10, (countAllVec * 7 / 10) - clusterCount);
                         }
 
                     }
@@ -923,7 +924,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 7 / 10 - clusterCount, (countAllVec * 8 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 7 / 10, (countAllVec * 8 / 10) - clusterCount);
                         }
 
                     }
@@ -931,7 +932,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next(countAllVec * 8 / 10 - clusterCount, (countAllVec * 9 / 10) - clusterCount);
+                            pointCoord[c] = random.Next(countAllVec * 8 / 10, (countAllVec * 9 / 10) - clusterCount);
                         }
 
                     }
@@ -939,7 +940,7 @@ namespace kmeans_algoritm
                     {
                         for (int c = 0; c < clusterCount; c++)
                         {
-                            pointCoord[c] = random.Next((countAllVec * 9 / 10) - clusterCount, countAllVec - clusterCount);
+                            pointCoord[c] = random.Next((countAllVec * 9 / 10), countAllVec - clusterCount);
                         }
                     }
                     break;
@@ -1079,8 +1080,12 @@ namespace kmeans_algoritm
                         coubtYForCenter += 1;
                     }
                 }
-                centroidsCluster[c, 0] = Convert.ToInt32(coordXForCenter / coubtXForCenter);
-                centroidsCluster[c, 1] = Convert.ToInt32(coordYForCenter / coubtYForCenter);
+                try
+                {
+                    centroidsCluster[c, 0] = Convert.ToInt32(coordXForCenter / coubtXForCenter);
+                    centroidsCluster[c, 1] = Convert.ToInt32(coordYForCenter / coubtYForCenter);
+                }
+                catch { }
 
                 for (int r = 0; r < vecRange; r++)
                 {
