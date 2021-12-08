@@ -228,30 +228,34 @@ namespace kmeans_algoritm
             clusterCountGraph = Form1.clusterCount;
             vecCountGraph = Form1.countAllVec;
             vectorCoordGraph = Form1.vectorCoord;
-            //graphCount
-            for (int i = 0; i <= Form1.graphCount; i++)
+            /*for (int i = 0; i <= Form1.graphCount; i++)
             {
                 chart1.Series["Series" + (i+1)].Points.Clear();
-            }
+            }*/
 
             for (int j = 0; j < iterationGraph; j++)
             {
                 iterationCountGraph[Form1.graphCount-1, j] = bestPartitionGraph[j];
             }
-            for (int i = 0; i < Form1.graphCount; i++)
-            {
-                textBox1.Text += (i+1)+": ";
+            //for (int i = 0; i < Form1.graphCount; i++)
+            //{
+                textBox1.Text += (Form1.graphCount)+": ";
                 for (int j = 0; j < iterationGraph; j++)
                 {
                     textBox1.Text += Convert.ToString(bestPartitionGraph[j]) + " ";
-                    chart1.Series["Series"+(i+1)].Points.Add(iterationCountGraph[i, j]); ;
+                    chart1.Series["Series"+(Form1.graphCount)].Points.Add(iterationCountGraph[Form1.graphCount-1, j]); ;
                 }
                 textBox1.Text += Environment.NewLine;
-            }
+            //}
+            first();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i <= Form1.graphCount; i++)
+            {
+                chart1.Series["Series" + (i+1)].Points.Clear();
+            }
             textBox1.Text = "";
             Form1.graphCount = 0;
             for (int i = 0; i <= Form1.graphCount; i++)
