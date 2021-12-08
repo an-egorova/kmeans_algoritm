@@ -71,15 +71,16 @@ namespace kmeans_algoritm
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(859, 12);
+            this.textBox1.Location = new System.Drawing.Point(840, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(209, 225);
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(209, 44);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(859, 558);
+            this.button1.Location = new System.Drawing.Point(840, 475);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(127, 50);
             this.button1.TabIndex = 2;
@@ -89,7 +90,7 @@ namespace kmeans_algoritm
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(859, 627);
+            this.textBox2.Location = new System.Drawing.Point(840, 553);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 4;
@@ -97,7 +98,7 @@ namespace kmeans_algoritm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(856, 611);
+            this.label1.Location = new System.Drawing.Point(837, 537);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 5;
@@ -113,7 +114,7 @@ namespace kmeans_algoritm
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(859, 243);
+            this.chart1.Location = new System.Drawing.Point(840, 65);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -165,14 +166,14 @@ namespace kmeans_algoritm
             this.chart1.Series.Add(series8);
             this.chart1.Series.Add(series9);
             this.chart1.Series.Add(series10);
-            this.chart1.Size = new System.Drawing.Size(503, 309);
+            this.chart1.Size = new System.Drawing.Size(570, 404);
             this.chart1.TabIndex = 6;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1001, 558);
+            this.button3.Location = new System.Drawing.Point(988, 475);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(133, 50);
             this.button3.TabIndex = 7;
@@ -214,7 +215,7 @@ namespace kmeans_algoritm
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1074, 190);
+            this.button2.Location = new System.Drawing.Point(1055, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 47);
             this.button2.TabIndex = 12;
@@ -224,7 +225,7 @@ namespace kmeans_algoritm
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1275, 190);
+            this.button4.Location = new System.Drawing.Point(1275, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(65, 47);
             this.button4.TabIndex = 13;
@@ -236,7 +237,7 @@ namespace kmeans_algoritm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 720);
+            this.ClientSize = new System.Drawing.Size(1389, 720);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);

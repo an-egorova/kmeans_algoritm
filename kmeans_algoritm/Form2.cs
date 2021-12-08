@@ -22,9 +22,12 @@ namespace kmeans_algoritm
         int[,] vectorCoordGraph;
         int iter = 0;
         SolidBrush[] Colors= new SolidBrush[140];
+        Pen blackPen = new Pen(Color.Black, 3);
         Graphics graphics1;
         Bitmap bitmap1;
         double[,] iterationCountGraph;
+        int Width=2000;
+        int Height=2000;
         public Form2()
         {
             InitializeComponent();
@@ -113,6 +116,8 @@ namespace kmeans_algoritm
             pictureBox1.Image = null;
             pictureBox1.Update();
             Thread.Sleep(100);
+            pictureBox1.Width = Width;
+            pictureBox1.Height = Height;
             //Graphics g = pictureBox1.CreateGraphics();
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             graphics1 = Graphics.FromImage(bitmap1);
@@ -123,8 +128,13 @@ namespace kmeans_algoritm
             for (int i = 0; i < clusterCountGraph; i++)
             {
                 graphics1.FillRectangle(Colors[i], centroidsClusterAllGraph[k, i, 0] + 1000, centroidsClusterAllGraph[k, i, 1] + 1000, 10, 10);
+                graphics1.DrawRectangle(blackPen, centroidsClusterAllGraph[k, i, 0] + 1000, centroidsClusterAllGraph[k, i, 1] + 1000, 11, 11);
             }
             pictureBox1.Image = bitmap1;
+            Width=pictureBox1.Width;
+            Height=pictureBox1.Height;
+            pictureBox1.Width = pictureBox1.Image.Width / zoom * 2;
+            pictureBox1.Height = pictureBox1.Image.Height / zoom * 2;
         }
 
 
@@ -133,6 +143,8 @@ namespace kmeans_algoritm
             pictureBox1.Image = null;
             pictureBox1.Update();
             Thread.Sleep(100);
+            pictureBox1.Width = Width;
+            pictureBox1.Height = Height;
             //Graphics g = pictureBox1.CreateGraphics();
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             graphics1 = Graphics.FromImage(bitmap1);
@@ -144,9 +156,13 @@ namespace kmeans_algoritm
             for (int i = 0; i < clusterCountGraph; i++)
             {
                 graphics1.FillRectangle(Colors[i], centroidsClusterAllGraph[0, i, 0] + 1000, centroidsClusterAllGraph[0, i, 1] + 1000, 10, 10);
+                graphics1.DrawRectangle(blackPen, centroidsClusterAllGraph[0, i, 0] + 1000, centroidsClusterAllGraph[0, i, 1] + 1000, 11, 11);
             }
             pictureBox1.Image = bitmap1;
-
+            Width = pictureBox1.Width;
+            Height = pictureBox1.Height;
+            pictureBox1.Width = pictureBox1.Image.Width / zoom * 2;
+            pictureBox1.Height = pictureBox1.Image.Height / zoom * 2;
         }
 
         private void button3_Click(object sender, EventArgs e)
